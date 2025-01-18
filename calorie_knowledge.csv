@@ -1,0 +1,16 @@
+Topic,Details
+BMR Calculation,"BMR is calculated using the Mifflin-St Jeor equation: 
+For men: BMR = 10 * weight(kg) + 6.25 * height(cm) - 5 * age(years) + 5
+For women: BMR = 10 * weight(kg) + 6.25 * height(cm) - 5 * age(years) - 161"
+Activity Multipliers,"Activity multipliers adjust BMR based on activity level: 
+Sedentary (little or no exercise): BMR * 1.2
+Lightly active (light exercise/sports 1-3 days/week): BMR * 1.375
+Moderately active (moderate exercise/sports 3-5 days/week): BMR * 1.55
+Very active (hard exercise/sports 6-7 days a week): BMR * 1.725
+Extra active (very hard exercise, physical job, or training twice a day): BMR * 1.9"
+Calorie Deficit Recommendation,A calorie deficit of 500–750 calories per day is recommended for safe weight loss of 0.5–1 kg per week.
+TDEE Calculation,TDEE (Total Daily Energy Expenditure) is calculated as BMR multiplied by an activity factor determined by activity level.
+Calorie Deficit Formula,"Calorie deficit is calculated as: 
+Calorie Deficit = TDEE - Calorie Intake"
+Weight Loss Guideline,"A safe and sustainable weight loss is 0.5–1 kg per week, requiring a calorie deficit of 3500–7000 calories per week."
+Physical Activity Levels,Physical activity levels impact calorie burn and should be considered when calculating TDEE and setting a calorie deficit.
