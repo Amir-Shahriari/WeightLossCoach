@@ -108,45 +108,34 @@ def calculate_and_recommend_weekly(details: UserDetails):
         sorted_exercises = exercise_data.sort_values(by='Calories per Hour', ascending=False)
 
         # Generate tailored weekly exercise plan
-        # Generate tailored weekly exercise plan
         weekly_exercise_plan = []
+        remaining_calories = weekly_deficit
 
         for _, row in sorted_exercises.iterrows():
+            if remaining_calories <= 0:
+                break
+
             activity = row["Activity, Exercise or Sport (1 hour)"]
             calories_per_hour = row['Calories per Hour']
 
-            # Allocate time based on calories burned
-            max_weekly_duration = 7  # Cap to 7 hours per week
-            min_daily_duration = 10  # Minimum duration per day in minutes
-
-            calories_burnable_per_week = min(max_weekly_duration * calories_per_hour, weekly_deficit)
-            duration_per_week = calories_burnable_per_week / calories_per_hour
-            duration_per_day = duration_per_week / 7 * 60  # Convert to minutes
-
-            if duration_per_day < min_daily_duration:
-                duration_per_day = min_daily_duration
-                duration_per_week = duration_per_day * 7 / 60
-
-            # Retrieve insights for the activity
-            query = f"Insights for performing {activity} optimally."
-            query_embedding = embedding_model.encode(query)
-            distances, indices = index.search(np.array([query_embedding], dtype="float32"), k=1)
-            best_match = metadata[indices[0][0]] if indices[0][0] < len(metadata) else {}
+            # Allocate dynamic time per activity
+            max_weekly_duration = min(remaining_calories / calories_per_hour, 4)  # Max 4 hours per week per activity
+            daily_duration = (max_weekly_duration / 7) * 60  # Convert to minutes
 
             weekly_exercise_plan.append({
                 "activity": activity,
                 "calories_burned_per_hour": round(calories_per_hour, 2),
-                "weekly_duration_hours": round(duration_per_week, 2),
-                "daily_duration_minutes": round(duration_per_day, 1),
-                "insights": best_match.get("activity", f"No specific insights available for {activity}.")
+                "weekly_duration_hours": round(max_weekly_duration, 2),
+                "daily_duration_minutes": round(daily_duration, 1),
             })
+
+            remaining_calories -= max_weekly_duration * calories_per_hour
 
         return {
             "message": "Weekly exercise plan created successfully.",
             "daily_calorie_intake": round(daily_deficit, 2),
             "weekly_exercise_plan": weekly_exercise_plan
         }
-
 
     except Exception as e:
         return {"error": str(e)}
