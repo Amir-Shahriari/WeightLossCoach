@@ -203,6 +203,7 @@ def calculate_and_recommend_daily(details: UserDetails):
             definition_text = generate_exercise_definition(activity_name)
 
             exercise_plan.append({
+                
                 "activity": activity_name,
                 "calories_burned_per_hour": round(cals_per_hour, 2),
                 "daily_burn_allocation": daily_exercise_burn,  # always 500
