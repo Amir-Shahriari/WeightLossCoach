@@ -189,7 +189,7 @@ def calculate_and_recommend_daily(details: UserDetails):
 
         # --- 6. Build the plan w/ Llama 2-based "insights" ---
         exercise_plan = []
-        for _, row in chosen_exercises.iterrows():
+        for idx, (_, row) in enumerate(chosen_exercises.iterrows()):
             activity_name = row["Activity, Exercise or Sport (1 hour)"]
             cals_per_hour = row["Calories per Hour"]
 
@@ -203,7 +203,7 @@ def calculate_and_recommend_daily(details: UserDetails):
             definition_text = generate_exercise_definition(activity_name)
 
             exercise_plan.append({
-                
+                "id": idx,
                 "activity": activity_name,
                 "calories_burned_per_hour": round(cals_per_hour, 2),
                 "daily_burn_allocation": daily_exercise_burn,  # always 500
