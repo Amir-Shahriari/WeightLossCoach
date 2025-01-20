@@ -1,3 +1,6 @@
+demo of the app:
+[Watch the video](https://www.dropbox.com/scl/fi/97v7twc83viks3wrej08q/DemoWeightLossCoach.mp4?rlkey=xxqep9to4y3nsjex148318lnz&st=edqjwzwl&dl=0)
+
 # Weight Loss Coach
 
 **Weight Loss Coach** is a FastAPI-based application designed to calculate personalized daily calorie recommendations and suggest tailored exercise routines for weight loss. The app leverages a Hugging Face model (Llama 2) to provide insightful descriptions of exercises.
